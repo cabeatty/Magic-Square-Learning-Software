@@ -15,124 +15,85 @@
 
 #include<cstdlib>
 #include<iostream>
-#include<ctime>
 #include<iomanip>
 #include <algorithm>
+#include <Headers/singlyEven.h>
+#include <Headers/doublyEven.h>
+#include <Headers/odd.h>
+
+using namespace std;
+
+void print(vector<vector<int>> &square, int n)  //Method to do the final pint out of the vector, with the addition listed on the side
+{
+	vector<int> rows;
+	vector<int> cols;
+
+	for (int a = 0; a < n; a++)  //do the addition on the rows and columns
+	{
+		int tempRow = 0;
+		int tempCol = 0;
+		for (int l = 0; l < n; l++)
+		{
+			tempRow = tempRow + square[a][l];
+			tempCol = tempCol + square[l][a];
+		}
+		rows.push_back(tempRow);
+		cols.push_back(tempCol);
+	}
+	//Printing out the magic square and its summations, fancy formatting and all
+	cout << "-----------------------------------\n";
+	for (int row = 0; row < n; row++) //print out the matrix
+	{
+		for (int col = 0; col < n; col++) {
+			cout << "[" << square[row][col] << "] \t";
+		}
+		cout << "" << rows[row];
+		cout << "\n\n";
+	}
+	for (int i = 0; i < n; i++)
+	{
+		cout << cols[i] << "\t\t";
+	}
+}
+
+void generate(vector<vector<int>> &square, int size)
+{
+	for (int i = 0; i < size; i++)
+	{
+		for (int j = 0; j < size; j++)
+		{
+			square[i][j] = 0;
+		}
+	}
+
+	if (size % 2 == 1)
+	{
+		cout << "You have selected an odd size magic square." << endl;
+		//odd(square, size);
+	}
+	else if (size % 4 == 0)
+	{
+		cout << "You have selected a doubly even size magic square." << endl;
+		//dEven(square, size);
+	}
+	else if (size % 2 == 0)
+	{
+		cout << "You have selected a singly even size magic square." << endl;
+		//sEven(square, size);
+	}
+}
 
 using namespace std;
 
 int main()
 {
-	srand( time( NULL ) ); //sets the seed for rand()
-	int a[4][4];
-	int rows[4] = {0, 0, 0, 0};
-	int cols[4] = {0, 0, 0, 0};
-	int diag[2] = {0, 0};
-	int answer = 0;
-	bool check = true;
-	cout << "Enter '1' to generate a random 4x4 integer matrix and check if it is a magic square."<<endl;
-	cout << "Enter any other value to see an actual magic square" << endl <<">";
-	cin >> answer;
+	int q;
+	cout<<"Enter a value between 3 & 100"<<endl;
+	cout<<">";
+	cin >> q;
 
-	//preset the values for a, in case the user wants to see an actual magic square
-	a[0][0] = 1;
-	a[0][1] = 15;
-	a[0][2] = 14;
-	a[0][3] = 4;
-	a[1][0] = 10;
-	a[1][1] = 11;
-	a[1][2] = 8;
-	a[1][3] = 5;
-	a[2][0] = 7;
-	a[2][1] = 6;
-	a[2][2] = 9;
-	a[2][3] = 12;
-	a[3][0] = 16;
-	a[3][1] = 2;
-	a[3][2] = 3;
-	a[3][3] = 13;
+	vector<vector<int>> square(q, vector<int> (q, 0));
+	int diag[2] = {0,0};
 
-	if (answer == 1)
-	{
-		for (int i = 0; i < 4; i++)  //clean the matrix to assist in generating unique numbers
-		{
-			for (int j = 0; j < 4; j++)
-			{
-				a[i][j] = 0;
-			}
-		}
-		static vector<int> usedNum;
-		usedNum.push_back(0);
-		for (int i = 0; i < 4; i++) //fill the matrix with random unique integer values 1-16
-		{
-			for (int j = 0; j < 4; j++)
-			{
-				int temp = rand() % 16 + 1;
-				if(find(usedNum.begin(), usedNum.end(), temp) != usedNum.end())
-				{
-					while (find(usedNum.begin(), usedNum.end(), temp) != usedNum.end())
-					{
-						temp = rand() % 16 + 1;
-					}
-				}
-				usedNum.push_back(temp);
-				a[i][j] = temp;
-			}
-		}
-	}
-
-	for (int i = 0; i < 4; i++)  //do the addition on the rows and columns
-	{
-		for (int j = 0; j <= 3; j++)
-		{
-			rows[i] = rows[i] + a[i][j];
-		}
-		for(int k = 0; k < 4; k++)
-		{
-			cols[i] += a[k][i];
-		}
-	}
-
-	for (int i = 0; i < 4; i++)  //addition for the diagonals
-	{
-		diag[0] += a[i][i];
-	}
-	diag[1] = a[3][0] + a[2][1] + a[1][2] + a[0][3];
-
-	//Printing out the magic square and its summations, fancy formatting and all
-	cout << "-----------------------------------\n";
-	cout << "\t\t\t\t\t\t\t\t" << diag[1] << "\n\n";
-	for (int row = 0; row < 4; row++) //print out the matrix
-	{
-		for (int col = 0; col < 4; col++) {
-			cout << "[" << a[row][col] << "] \t";
-		}
-		cout << "" << rows[row];
-		cout << "\n\n";
-	}
-	for (int i = 0; i < 4; i++)
-	{
-		cout << cols[i] << "\t\t";
-	}
-	cout << diag[0] << endl;
-
-	for (int i = 0; i < 4; i++) //checking on the cols and rows
-	{
-		if(rows[0] != rows[i] || cols[0] != cols[i])
-		{
-			check = false;
-		}
-	}
-	if (diag[0] != diag[1])
-	{
-		check = false;
-	}
-
-	cout << "-----------------------------------\n";
-	if(check)
-		cout<<"This is a magic square!"<<endl;
-	if(!check)
-		cout<<"This is not a magic square!"<<endl;
-
-	return 0;
+	generate(square, q);
 }
