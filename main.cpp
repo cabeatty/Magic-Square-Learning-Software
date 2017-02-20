@@ -17,11 +17,43 @@
 #include<iostream>
 #include<iomanip>
 #include <algorithm>
-#include <Headers/singlyEven.h>
-#include <Headers/doublyEven.h>
-#include <Headers/odd.h>
 
 using namespace std;
+
+
+void odd(vector<vector<int>> &square, int n)
+{
+	//TODO: visualization.  print the square at each step
+	int i = n / 2;
+	int j = n - 1;
+
+	for (int num = 1; num <= n * n;) {
+		if (i == -1 && j == n) //3rd condition
+		{
+			j = n - 2;
+			i = 0;
+		}
+		else
+		{
+			if (j == n) //1st condition helper if next number goes to out of square's right side
+				j = 0;
+			if (i < 0)  //1st condition helper if next number is goes to out of square's upper side
+				i = n - 1;
+		}
+		if (square[i][j]) //2nd condition
+		{
+			j -= 2;
+			i++;
+			continue;
+		} else
+			square[i][j] = num++; //set number
+			//TODO print should probably be here, where we actually make changes
+
+		j++;
+		i--; //1st condition
+
+	}
+}
 
 void print(vector<vector<int>> &square, int n)  //Method to do the final pint out of the vector, with the addition listed on the side
 {
@@ -69,7 +101,10 @@ void generate(vector<vector<int>> &square, int size)
 	if (size % 2 == 1)
 	{
 		cout << "You have selected an odd size magic square." << endl;
-		//odd(square, size);
+		cout << "This is how we solve a magic square of odd size: " << endl;
+		odd(square, size);
+		print(square, size);  //Final print of the completed square.
+		//TODO need to make steps inbetween, maybe store in a different method and pipe in the steps accordingly from text files?
 	}
 	else if (size % 4 == 0)
 	{
@@ -82,8 +117,6 @@ void generate(vector<vector<int>> &square, int size)
 		//sEven(square, size);
 	}
 }
-
-using namespace std;
 
 int main()
 {
