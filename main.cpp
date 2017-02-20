@@ -55,6 +55,34 @@ void odd(vector<vector<int>> &square, int n)
 	}
 }
 
+void dEven(vector<vector<int>> &square, int n)
+{
+	int i, j;
+	vector<vector<int>> I(n, vector<int>(n, 0));
+	vector<vector<int>> J(n, vector<int>(n, 0));
+	int index = 1;
+	for (i = 0; i < n; i++)
+	{
+		for (j = 0; j < n; j++)
+		{
+			I[i][j] = ((i + 1) % 4) / 2;
+			J[j][i] = ((i + 1) % 4) / 2;
+			square[i][j] = index;
+			index++;
+		}
+	}
+	for (i = 0; i < n; i++)
+	{
+		for (j = 0; j < n; j++)
+		{
+			if (I[i][j] == J[i][j])
+			{
+				square[i][j] = n * n + 1 - square[i][j];
+			}
+		}
+	}
+}
+
 void print(vector<vector<int>> &square, int n)  //Method to do the final pint out of the vector, with the addition listed on the side
 {
 	vector<int> rows;
@@ -103,13 +131,14 @@ void generate(vector<vector<int>> &square, int size)
 		cout << "You have selected an odd size magic square." << endl;
 		cout << "This is how we solve a magic square of odd size: " << endl;
 		odd(square, size);
-		print(square, size);  //Final print of the completed square.
-		//TODO need to make steps inbetween, maybe store in a different method and pipe in the steps accordingly from text files?
+		print(square, size);     //Final print of the completed square.
+		//TODO need to make steps in between, maybe store in a different method and pipe in the steps accordingly from text files?
 	}
 	else if (size % 4 == 0)
 	{
 		cout << "You have selected a doubly even size magic square." << endl;
-		//dEven(square, size);
+		dEven(square, size);
+		print(square, size);    //Final print of the completed square.
 	}
 	else if (size % 2 == 0)
 	{
@@ -121,9 +150,16 @@ void generate(vector<vector<int>> &square, int size)
 int main()
 {
 	int q;
-	cout<<"Enter a value between 3 & 100"<<endl;
+	cout<<"Enter an integer value between 3 & 20"<<endl;
 	cout<<">";
 	cin >> q;
+	while( q < 3 || q > 20 )
+	{
+		cout<<"//ERROR// The number has to be somewhere between 3 and 20"<<endl;
+		cout<<"Enter an integer value between 3 & 20"<<endl;
+		cout<<">";
+		cin >> q;
+	}
 
 	vector<vector<int>> square(q, vector<int> (q, 0));
 	int diag[2] = {0,0};
