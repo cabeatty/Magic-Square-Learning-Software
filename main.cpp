@@ -101,7 +101,6 @@ void print(vector<vector<int>> &square, int n)  //Method to do the final pint ou
 		cols.push_back(tempCol);
 	}
 	//Printing out the magic square and its summations, fancy formatting and all
-	cout << "-----------------------------------\n";
 	for (int row = 0; row < n; row++) //print out the matrix
 	{
 		for (int col = 0; col < n; col++) {
@@ -150,8 +149,18 @@ void generate(vector<vector<int>> &square, int size)
 int main()
 {
 	int q;
-	cout<<"Enter an integer value between 3 & 20"<<endl;
-	cout<<">";
+	cout << "----------------------------------------------" << endl;
+	cout << "Welcome to the magic square learning software!" << endl;
+	cout << "----------------------------------------------\n" << endl;
+	cout << "Magic Square (Noun):" << endl;
+	cout << "In recreational mathematics, a magic square is a NxN square grid (where N is the number of cells on each side)" << endl;
+	cout << "filled with distinct positive integers in the range {1 , 2 , . . . , N*N} such that each cell contains a unique"<< endl;
+	cout << "integer and the sum of the integers in each row, column and diagonal is equal. The sum is called the magic " << endl;
+	cout << "constant or magic sum of the magic square" << endl;
+	cout << "\n";
+	cout << "Our goal is to teach you how to make magic squares yourself.  Select a size you want to start with:" << endl;
+	cout << "Enter an integer value between 3 & 20"<<endl;
+	cout << ">";
 	cin >> q;
 	while( q < 3 || q > 20 )
 	{
