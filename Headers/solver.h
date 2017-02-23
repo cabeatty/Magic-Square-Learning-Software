@@ -6,9 +6,17 @@
 
 using namespace std;
 
-void hello()
+void printStep(vector<vector<int>> &square, int n)  //Method to do the final pint out of the vector, with the addition listed on the side
 {
-	cout << "hello" << endl;
+	//Printing out the magic square and its summations, fancy formatting and all
+	for (int row = 0; row < n; row++) //print out the matrix
+	{
+		for (int col = 0; col < n; col++)
+		{
+			cout << "[" << square[row][col] << "] \t";
+		}
+		cout << "\n\n";
+	}
 }
 
 void odd(vector<vector<int>> &square, int n)
@@ -36,7 +44,12 @@ void odd(vector<vector<int>> &square, int n)
 			i++;
 			continue;
 		} else
+		{
+			cout << "-----------------------------------" << endl;
+			cout << "Step " << num << endl << endl;
 			square[i][j] = num++; //set number
+			printStep(square, n);
+		}
 		//TODO print should probably be here, where we actually make changes
 
 		j++;

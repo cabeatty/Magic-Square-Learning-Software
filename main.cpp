@@ -23,6 +23,8 @@ using namespace std;
 
 void print(vector<vector<int>> &square, int n)  //Method to do the final pint out of the vector, with the addition listed on the side
 {
+	cout << "\n-----------------------------------" << endl;
+	cout << "The final square will look like: \n" << endl;
 	vector<int> rows;
 	vector<int> cols;
 
@@ -80,13 +82,12 @@ void generate(vector<vector<int>> &square, int size)
 	else if (size % 2 == 0)
 	{
 		cout << "You have selected a singly even size magic square." << endl;
-		//sEven(square, size);
+		sEven(square, size);
 	}
 }
 
 int main()
 {
-	hello();
 	int q;
 	cout << "----------------------------------------------" << endl;
 	cout << "Welcome to the magic square learning software!" << endl;
