@@ -1,21 +1,9 @@
 /**  Created by cabeatty 1-20-16
- *  There wasn't really anything in class that I did not understand.  So I decided just to
- *  show some fun mathematical principals, namely, a magic square.  And I also allowed the user to
- *  generate one himself.
- *
- *  Wanted to showcase a simple mathematical trick, known as a magic square.
- *  This is essentially a square matrix full of unique integer values, ranging from 1 to the
- *  size row*col, for example a 4x4 array would have a max value of 16, where all the
- *  rows add up to the same number, all the columns add up to the same number,
- *  and both of the diagonals add up to the same value as well.
- *
- *  I give the user the option to either see a randomly generated 4x4 matrix and test it
- *  to check if it is indeed a magic square, or to view a preset magic square.
+ *	The point of this software is to teach anyone to solve a magic square
 **/
 
-#include<cstdlib>
-#include<iostream>
-#include<iomanip>
+#include <cstdlib>
+#include <iostream>
 #include <algorithm>
 #include "Headers/solver.h"
 
@@ -57,6 +45,7 @@ void print(vector<vector<int>> &square, int n)  //Method to do the final pint ou
 
 void generate(vector<vector<int>> &square, int size)
 {
+	char enter; //placeholder for press enter to continue breaks
 	for (int i = 0; i < size; i++)
 	{
 		for (int j = 0; j < size; j++)
@@ -67,8 +56,18 @@ void generate(vector<vector<int>> &square, int size)
 
 	if (size % 2 == 1)
 	{
-		cout << "You have selected an odd size magic square." << endl;
-		cout << "This is how we solve a magic square of odd size: " << endl;
+		double exp = pow ( (double)size, 3.0);
+		double S = (exp + size) * .5;
+		cout << "\n-------------------------------------------------------------------------------------------------------" << endl;
+		cout << "|You have selected an odd size magic square.|" << endl;
+		cout << "-------------------------------------------------------------------------------------------------------" << endl;
+		cout << "Since this is an odd size magic square, we know that the magic constant will be S where S= .5*(N^3+N).  " << endl;
+		cout << "For the square you have selected, this constant will be " << S << endl;
+		cout << "So we know we will be done solving when all of the rows, columns, and diagonals add up to " << S << "." << endl;
+		cout << "\nThis is how we solve a magic square of odd size: " << endl;
+		cout << "Enter any key to continue.";
+		cin >> enter;
+
 		odd(square, size);
 		print(square, size);     //Final print of the completed square.
 		//TODO need to make steps in between, maybe store in a different method and pipe in the steps accordingly from text files?
