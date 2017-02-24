@@ -66,7 +66,7 @@ void generate(vector<vector<int>> &square, int size)
 		cout << "So we know we will be done solving when all of the rows, columns, and diagonals add up to " << S << "." << endl;
 		cout << "\nThe general pattern is that we will put each number one column to the right, and one row up from the" << endl;
 		cout << "previous number.  We start this pattern from the middle position of the top row." << endl;
-		cout << "Press any key and enter to continue.\n";
+		cout << "Press any key and enter to continue....\n";
 		cin >> enter;
 
 		odd(square, size);
@@ -81,7 +81,7 @@ void generate(vector<vector<int>> &square, int size)
 		cout << "Since this is a doubly even size magic square, we know that the magic constant will be S where " << endl;
 		cout << "S = .5*(N^3+N).  For the square you have selected, this constant will be " << S << endl;
 		cout << "So we know we will be done solving when all of the rows, columns, and diagonals add up to " << S << "." << endl;
-		cout << "\nPress any key and enter to continue.\n";
+		cout << "\nPress any key and enter to continue....\n";
 		cin >> enter;
 		dEven(square, size);
 		print(square, size);    //Final print of the completed square.
@@ -94,11 +94,12 @@ void generate(vector<vector<int>> &square, int size)
 		cout << "Since this is a singly even size magic square, we know that the magic constant will be S where " << endl;
 		cout << "S = .5*(N^3+N).  For the square you have selected, this constant will be " << S << endl;
 		cout << "So we know we will be done solving when all of the rows, columns, and diagonals add up to " << S << "." << endl;
-		cout << "\nThis is how we solve a magic square of singly even size: " << endl;
+		cout << "\nTo start off, we will solve an odd magic square of size (N/2)x(N/2), in this case that square will be of size" << endl;
+		cout<<size/2  << "x" << size/2 << ".  We will then fold 4 of these odd squares back into the original square, and do some  moving around.\n";
 		cout << "Press any key and enter to continue.\n";
 		cin >> enter;
 		sEven(square, size);
-		//print(square, size);
+		print(square, size);
 		//TODO make this work
 	}
 }

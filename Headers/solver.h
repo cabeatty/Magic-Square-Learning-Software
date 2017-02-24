@@ -105,6 +105,7 @@ void dEven(vector<vector<int>> &square, int n)
 
 void sEven(vector<vector<int>> &square, int n)
 {
+	char enter;
 	//TODO sudden realization about singly even numbers.
 	/* Essentially all singly even numbers can be broken down into an odd times 2.
 	 * Which means that all we need to do is divide the singly even square into 4
@@ -125,9 +126,14 @@ void sEven(vector<vector<int>> &square, int n)
 
 	int p = n / 2;
 	int max = p*p;  //Proportional additive for the quadrants
+	int ind = max;  //for indexing the steps and not changing the value of max
 	int i, j;
 	vector<vector<int>> quadrant(p, vector<int>(p, 0));
 	odd(quadrant, p);
+	cout << "------------------------------------------------------------------------------------------------------------------------" << endl;
+	cout << "-- Step " << ind++ <<" --" << endl;
+	cout << "------------------------------------------------------------------------------------------------------------------------" << endl;
+	cout << endl << "Now that that is done, we fold said odd magic square back into the original, like follows:" << endl << endl;
 
 	for (i=0; i<p; i++) //filling all of the quadrants at once
 		for (j=0; j<p; j++ )
@@ -137,15 +143,54 @@ void sEven(vector<vector<int>> &square, int n)
 			square[i+p][j] = quadrant[i][j];    //Bottom left
 			square[i+p][j+p] = quadrant[i][j];  //Bottom right
 		}
-	for (i=0; i<p; i++) //doing the addition on all of the quadrants at once
+	printStep(square, n);
+	cout << "Press any key and enter to continue.\n";
+	cin >> enter;
+	cout << endl;
+
+	cout << "------------------------------------------------------------------------------------------------------------------------" << endl;
+	cout << "-- Step " << ind++ <<" --" << endl;
+	cout << "------------------------------------------------------------------------------------------------------------------------" << endl;
+	cout << endl << "Now that that is done, we add the max value in the top right quadrant, to all of the values in the bottom " << endl;
+	cout << "right quadrant.  In this case that number is " << max << "." << endl << endl;
+	for (i=0; i<p; i++) //doing the addition on the bottom right quadrant
 		for (j=0; j<p; j++ )
 		{
-			square[i][j] += 0;          //Top left (no addition needed)
-			square[i][j+p] += (max*2);    //Top right (adding 2*p to each)
-			square[i+p][j] += (max*3);    //Bottom left (adding 3*p to each)
 			square[i+p][j+p] += max;      //Bottom right (adding p to each)
 		}
-
 	printStep(square, n);
+	cout << "Press any key and enter to continue.\n";
+	cin >> enter;
+	cout << endl;
+
+	cout << "------------------------------------------------------------------------------------------------------------------------" << endl;
+	cout << "-- Step " << ind++ <<" --" << endl;
+	cout << "------------------------------------------------------------------------------------------------------------------------" << endl;
+	cout << endl << "Now that that is done, we add the max value in the bottom left quadrant, to all of the values in the top " << endl;
+	cout << "right quadrant.  In this case that number is " << max*2 << "." << endl << endl;
+	for (i=0; i<p; i++) //doing the addition on the top right
+		for (j=0; j<p; j++ )
+		{
+			square[i][j+p] += (max*2);    //Top right (adding 2*p to each)
+		}
+	printStep(square, n);
+	cout << "Press any key and enter to continue.\n";
+	cin >> enter;
+	cout << endl;
+
+	cout << "------------------------------------------------------------------------------------------------------------------------" << endl;
+	cout << "-- Step " << ind++ <<" --" << endl;
+	cout << "------------------------------------------------------------------------------------------------------------------------" << endl;
+	cout << endl << "Now that that is done, we add the max value in the top right quadrant, to all of the values in the bottom " << endl;
+	cout << "left quadrant.  In this case that number is " << max*3 << "." << endl << endl;
+	for (i=0; i<p; i++) //doing the addition on the bottom left quadrant
+		for (j=0; j<p; j++ )
+		{
+			square[i+p][j] += (max*3);    //Bottom left (adding 3*p to each)
+		}
+	printStep(square, n);
+	cout << "Press any key and enter to continue.\n";
+	cin >> enter;
+	cout << endl;
 
 }
