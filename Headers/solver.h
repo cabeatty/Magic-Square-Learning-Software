@@ -4,6 +4,8 @@
 **/
 #define MIDTERM_ALT_SINGLYEVEN_H
 
+#include <string>
+
 using namespace std;
 
 void printStep(vector<vector<int>> &square, int n)  //Method to do the final pint out of the vector, with the addition listed on the side
@@ -21,40 +23,55 @@ void printStep(vector<vector<int>> &square, int n)  //Method to do the final pin
 
 void odd(vector<vector<int>> &square, int n)
 {
-	//TODO: visualization.  print the square at each step
-	int i = n / 2;
-	int j = n - 1;
+	int messInd = 0;
+	string messages[5] =
+			{   "Since this is the first step, we simply put a 1 in the middle spot on the top row.",
+				"Since one row up is outside the square, we go one column right, and place the number in the bottom row of that column.",
+			    "Since one column right is outside the square, we go one row up, and place the number in the first column of that row.",
+			    "Since one column right and one row up is already filled, we simply put the number in the position below the last.",
+			    "We place the next number one column to the right, and one row up."
+			};
+	char enter; //For press any key and enter to continue
+	int x = n/2;  //Center of the square
+	int y = 0;
+	//starting at the center on the top row with 1, we put the next number one square right, and one square up
+	//repeating this process until we get to n;
+	for(int i = 1; i <= n*n; i++)
+	{
+		square[y][x] = i;
 
-	for (int num = 1; num <= n * n;) {
-		if (i == -1 && j == n) //3rd condition
-		{
-			j = n - 2;
-			i = 0;
-		}
-		else
-		{
-			if (j == n) //1st condition helper if next number goes to out of square's right side
-				j = 0;
-			if (i < 0)  //1st condition helper if next number is goes to out of square's upper side
-				i = n - 1;
-		}
-		if (square[i][j]) //2nd condition
-		{
-			j -= 2;
-			i++;
-			continue;
-		} else
-		{
-			cout << "-----------------------------------" << endl;
-			cout << "Step " << num << endl << endl;
-			square[i][j] = num++; //set number
-			printStep(square, n);
-		}
-		//TODO print should probably be here, where we actually make changes
+		cout << "------------------------------------------------------------------------------------------------------------------------" << endl;
+		cout << "-- Step " << i <<" --" << endl;
+		cout << "------------------------------------------------------------------------------------------------------------------------" << endl;
+		cout << endl << messages[messInd] << endl << endl;
+		printStep(square, n);
+		cout << "Press any key and enter to continue.\n";
+		cin >> enter;
+		cout << endl;
 
-		j++;
-		i--; //1st condition
-
+		int tempx = x+1;
+		int tempy = y-1;
+		messInd = 4;
+		if (tempx >= n)
+		{
+			messInd = 2;
+			tempx = 0;
+		}
+		if (tempy <= -1)
+		{
+			messInd = 1;
+			tempy = (n - 1);
+		}
+		if(square[tempy][tempx] == 0)
+		{
+			x = tempx;
+			y = tempy;
+		}
+		if(square[tempy][tempx] != 0)
+		{
+			messInd = 3;
+			y++;
+		}
 	}
 }
 
@@ -107,10 +124,28 @@ void sEven(vector<vector<int>> &square, int n)
 	//TODO make this step
 
 	int p = n / 2;
+	int max = p*p;  //Proportional additive for the quadrants
+	int i, j;
 	vector<vector<int>> quadrant(p, vector<int>(p, 0));
-	int max = 
-
-
-	//I think I may have a clever way of solving this.
 	odd(quadrant, p);
+
+	for (i=0; i<p; i++) //filling all of the quadrants at once
+		for (j=0; j<p; j++ )
+		{
+			square[i][j] = quadrant[i][j];      //Top left
+			square[i][j+p] = quadrant[i][j];    //Top right
+			square[i+p][j] = quadrant[i][j];    //Bottom left
+			square[i+p][j+p] = quadrant[i][j];  //Bottom right
+		}
+	for (i=0; i<p; i++) //doing the addition on all of the quadrants at once
+		for (j=0; j<p; j++ )
+		{
+			square[i][j] += 0;          //Top left (no addition needed)
+			square[i][j+p] += (max*2);    //Top right (adding 2*p to each)
+			square[i+p][j] += (max*3);    //Bottom left (adding 3*p to each)
+			square[i+p][j+p] += max;      //Bottom right (adding p to each)
+		}
+
+	printStep(square, n);
+
 }
