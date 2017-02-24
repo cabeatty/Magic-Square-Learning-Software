@@ -83,6 +83,8 @@ void generate(vector<vector<int>> &square, int size)
 	{
 		cout << "You have selected a singly even size magic square." << endl;
 		sEven(square, size);
+		print(square, size);
+		//TODO make this work
 	}
 }
 
