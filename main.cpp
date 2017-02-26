@@ -100,7 +100,6 @@ void generate(vector<vector<int>> &square, int size)
 		cin >> enter;
 		sEven(square, size);
 		print(square, size);
-		//TODO make this work
 	}
 }
 

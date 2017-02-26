@@ -8,9 +8,8 @@
 
 using namespace std;
 
-void printStep(vector<vector<int>> &square, int n)  //Method to do the final pint out of the vector, with the addition listed on the side
+void printStep(vector<vector<int>> &square, int n)  //All this will do is print out the matrix at a step determined by other methods
 {
-	//Printing out the magic square and its summations, fancy formatting and all
 	for (int row = 0; row < n; row++) //print out the matrix
 	{
 		for (int col = 0; col < n; col++)
@@ -77,6 +76,7 @@ void odd(vector<vector<int>> &square, int n)
 
 void dEven(vector<vector<int>> &square, int n)
 {
+	//TODO: steps and visualizeation
 	int i, j;
 	vector<vector<int>> I(n, vector<int>(n, 0));
 	vector<vector<int>> J(n, vector<int>(n, 0));
@@ -105,8 +105,6 @@ void dEven(vector<vector<int>> &square, int n)
 
 void sEven(vector<vector<int>> &square, int n)
 {
-	char enter;
-	//TODO sudden realization about singly even numbers.
 	/* Essentially all singly even numbers can be broken down into an odd times 2.
 	 * Which means that all we need to do is divide the singly even square into 4
 	 * odd squares (one for each quadrant) and solve each in the right order.
@@ -121,14 +119,16 @@ void sEven(vector<vector<int>> &square, int n)
 	 * algorithm all together.
 	 */
 
-	//There will be an extra step at the end where we switch some numbers around, but that is it past solving an odd.
-	//TODO make this step
-
+	char enter;
 	int p = n / 2;
 	int max = p*p;  //Proportional additive for the quadrants
 	int ind = max;  //for indexing the steps and not changing the value of max
 	int i, j;
-	vector<vector<int>> quadrant(p, vector<int>(p, 0));
+	vector<int> swapCol(n);  //For the swapping procedure
+	int swapInd = 0;  //Indexing for the swapCol array
+	int k = (n-2)/4;  // to get ticknes of the swaps
+
+	vector<vector<int>> quadrant(p, vector<int>(p, 0));  //We need an odd magic square of length half N
 	odd(quadrant, p);
 	cout << "------------------------------------------------------------------------------------------------------------------------" << endl;
 	cout << "-- Step " << ind++ <<" --" << endl;
@@ -192,5 +192,42 @@ void sEven(vector<vector<int>> &square, int n)
 	cout << "Press any key and enter to continue.\n";
 	cin >> enter;
 	cout << endl;
+
+	cout << "------------------------------------------------------------------------------------------------------------------------" << endl;
+	cout << "-- Step " << ind++ <<" --" << endl;
+	cout << "------------------------------------------------------------------------------------------------------------------------" << endl;
+	cout << endl << "Now we have to do some switching around.  The square is almost complete, but some things have to be moved around" << endl;
+	cout << "to make it work.  Look at the numbers with '-' next to them, we are going to switch them with their counterpart" << endl;
+	cout << "in the quadrant below.  These are the numbers with a '+' next to them." << endl << endl;
+	//Writing custom version of printstep here to show which numbers we will be switching.
+
+	for (i=1; i<=k; i++)
+	{
+		swapInd++;
+		swapCol[swapInd] = i;
+	}
+	for (i=(n-k+2); i<=n; i++)
+	{
+		swapInd++;
+		swapCol[swapInd] = i;
+	}
+	for (i = 0; i<n; i++)
+		cout << swapCol[i] << ", ";
+
+	cout << endl;
+	for (int row = 0; row < n; row++) //print out the matrix
+	{
+		for (int col = 0; col < n; col++)
+		{
+			cout << "[" << square[row][col] << "] \t";
+		}
+		cout << "\n\n";
+	}
+
+	cout << "Press any key and enter to continue.\n";
+	cin >> enter;
+	cout << endl;
+
+	//TODO: switching
 
 }
