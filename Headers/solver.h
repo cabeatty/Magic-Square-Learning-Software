@@ -8,8 +8,7 @@
 
 using namespace std;
 
-void printStep(vector<vector<int>> &square,
-               int n)  //All this will do is print out the matrix at a step determined by other methods
+void printStep(vector<vector<int>> &square, int n)  //All this will do is print out the matrix at a step determined by other methods
 {
 	for (int row = 0; row < n; row++) //print out the matrix
 	{
@@ -18,6 +17,10 @@ void printStep(vector<vector<int>> &square,
 			cout << "[" << square[row][col] << "] \t";
 		}
 		cout << "\n\n";
+		if (row < n-1)
+		{
+			cout << "\n";
+		}
 	}
 }
 
@@ -51,6 +54,10 @@ void printStepMarked(vector<vector<int>> &square, vector<vector<int>> &markup, i
 			cout << " \t";
 		}
 		cout << "\n\n";
+		if (row < n-1)
+		{
+			cout << "\n";
+		}
 	}
 }
 
@@ -171,6 +178,7 @@ void dEven(vector<vector<int>> &square, int n)
 
 void sEven(vector<vector<int>> &square, int n)
 {
+	//This one is a pain in the ass, especially with the description
 	/* Essentially all singly even numbers can be broken down into an odd times 2.
 	 * Which means that all we need to do is divide the singly even square into 4
 	 * odd squares (one for each quadrant) and solve each in the right order.
@@ -194,7 +202,7 @@ void sEven(vector<vector<int>> &square, int n)
 	vector<vector<int>> quadrant(p, vector<int>(p, 0));  //We need an odd magic square of length half N
 	odd(quadrant, p);
 	step(ind++);
-	cout << endl << "Now that that is done, we fold said odd magic square back into the original, like follows:\n";
+	cout << "Now that that is done, we fold said odd magic square back into the original, like follows:\n\n";
 
 	for (i = 0; i < p; i++) //filling all of the quadrants at once
 		for (j = 0; j < p; j++)
@@ -209,7 +217,7 @@ void sEven(vector<vector<int>> &square, int n)
 	pause();
 
 	step(ind++);
-	cout << endl << "Now that that is done, we add the max value in the top right quadrant, to all of the values in the bottom \n";
+	cout << "Now that that is done, we add the max value in the top right quadrant, to all of the values in the bottom \n";
 	cout << "right quadrant.  In this case that number is " << max << ".\n\n";
 
 	for (i = 0; i < p; i++) //doing the addition on the bottom right quadrant
@@ -232,7 +240,7 @@ void sEven(vector<vector<int>> &square, int n)
 	pause();
 
 	step(ind++);
-	cout << "Now that that is done, we add the max value in the top right quadrant, to all of the values in the bottom \n"
+	cout << "Now that that is done, we add the max value in the top right quadrant, to all of the values in the bottom \n";
 	cout << "left quadrant.  In this case that number is " << max * 3 << ".\n\n";
 	for (i = 0; i < p; i++) //doing the addition on the bottom left quadrant
 		for (j = 0; j < p; j++)
@@ -243,7 +251,7 @@ void sEven(vector<vector<int>> &square, int n)
 	pause();
 
 	step(ind++);
-	cout << endl << "Now we have to do some switching around.  The square is almost complete, but some things have to be moved around\n";
+	cout << "Now we have to do some switching around.  The square is almost complete, but some things have to be moved around\n";
 	cout << "to make it work.  Look at the numbers with '-' next to them, we are going to switch them with their counterpart\n";
 	cout << "in the quadrant below.  These are the numbers with a '+' next to them.\n\n";
 	vector<vector<int>> markColLeft(p, vector<int>(p, 0));
@@ -290,7 +298,7 @@ void sEven(vector<vector<int>> &square, int n)
 	pause();
 
 	step(ind++);
-	cout << endl << "With the switching done, we see the new ordering of the square.\n\n";
+	cout << "With the switching done, we see the new ordering of the square.\n\n";
 	//Now I do the actual swapping
 	int tempL, tempR;
 	for (i = 0; i < p; i++) //filling all of the quadrants at once

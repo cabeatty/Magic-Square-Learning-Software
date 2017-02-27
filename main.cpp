@@ -11,8 +11,12 @@ using namespace std;
 
 void print(vector<vector<int>> &square, int n)  //Method to do the final pint out of the vector, with the addition listed on the side
 {
-	cout << "\n-------------------------------------------------------------------------------------------------------" << endl;
-	cout << "The final square will look like: \n" << endl;
+	cout << "------------------------------------------------------------------------------------------------------------------------\n";
+	cout << "-- Final Step -- \n";
+	cout << "------------------------------------------------------------------------------------------------------------------------\n\n";
+	cout << "Now that the square is complete, we will do the addition on the rows, columns, and diagonals to check that our square\n";
+	cout << "is an actual magic square.\n\n";
+
 	vector<int> rows;
 	vector<int> cols;
 
@@ -35,12 +39,14 @@ void print(vector<vector<int>> &square, int n)  //Method to do the final pint ou
 			cout << "[" << square[row][col] << "] \t";
 		}
 		cout << "" << rows[row];
-		cout << "\n\n";
+		cout << "\n\n\n";
 	}
 	for (int i = 0; i < n; i++)
 	{
 		cout << cols[i] << "\t\t";
 	}
+
+	cout << "\n\nGreat Job!  \nIt looks like we have made a genuine magic square!\n";
 }
 
 void generate(vector<vector<int>> &square, int size)
@@ -58,15 +64,15 @@ void generate(vector<vector<int>> &square, int size)
 
 	if (size % 2 == 1)
 	{
-		cout << "\n------------------------------------------------------------------------------------------------------------------------" << endl;
+		cout << "\n------------------------------------------------------------------------------------------------------------------------\n";
 		cout << "-- You have selected an odd size magic square --" << endl;
-		cout << "------------------------------------------------------------------------------------------------------------------------\n" << endl;
-		cout << "Since this is an odd size magic square, we know that the magic constant will be S where S = .5*(N^3+N).  " << endl;
+		cout << "------------------------------------------------------------------------------------------------------------------------\n\n";
+		cout << "Since this is an odd size magic square, we know that the magic constant will be S where S = .5*(N^3+N).  \n";
 		cout << "For the square you have selected, this constant will be " << S << endl;
-		cout << "So we know we will be done solving when all of the rows, columns, and diagonals add up to " << S << "." << endl;
-		cout << "\nThe general pattern is that we will put each number one column to the right, and one row up from the" << endl;
-		cout << "previous number.  We start this pattern from the middle position of the top row." << endl;
-		cout << "Press any key and enter to continue....\n";
+		cout << "So we know we will be done solving when all of the rows, columns, and diagonals add up to " << S << ".\n";
+		cout << "\nThe general pattern is that we will put each number one column to the right, and one row up from the\n";
+		cout << "previous number.  We start this pattern from the middle position of the top row.\n";
+		cout << "\nPress any key and enter to continue....\n";
 		cin >> enter;
 
 		odd(square, size);
@@ -75,12 +81,12 @@ void generate(vector<vector<int>> &square, int size)
 	}
 	else if (size % 4 == 0)
 	{
-		cout << "\n------------------------------------------------------------------------------------------------------------------------" << endl;
-		cout << "-- You have selected a doubly even size magic square --" << endl;
-		cout << "------------------------------------------------------------------------------------------------------------------------\n" << endl;
-		cout << "Since this is a doubly even size magic square, we know that the magic constant will be S where " << endl;
+		cout << "\n------------------------------------------------------------------------------------------------------------------------\n";
+		cout << "-- You have selected a doubly even size magic square --\n";
+		cout << "------------------------------------------------------------------------------------------------------------------------\n\n";
+		cout << "Since this is a doubly even size magic square, we know that the magic constant will be S where \n";
 		cout << "S = .5*(N^3+N).  For the square you have selected, this constant will be " << S << endl;
-		cout << "So we know we will be done solving when all of the rows, columns, and diagonals add up to " << S << "." << endl;
+		cout << "So we know we will be done solving when all of the rows, columns, and diagonals add up to " << S << ".\n";
 		cout << "\nPress any key and enter to continue....\n";
 		cin >> enter;
 		dEven(square, size);
@@ -88,15 +94,15 @@ void generate(vector<vector<int>> &square, int size)
 	}
 	else if (size % 2 == 0)
 	{
-		cout << "\n------------------------------------------------------------------------------------------------------------------------" << endl;
-		cout << "-- You have selected a singly even size magic square --" << endl;
-		cout << "------------------------------------------------------------------------------------------------------------------------\n" << endl;
-		cout << "Since this is a singly even size magic square, we know that the magic constant will be S where " << endl;
+		cout << "\n------------------------------------------------------------------------------------------------------------------------\n";
+		cout << "-- You have selected a singly even size magic square --\n";
+		cout << "------------------------------------------------------------------------------------------------------------------------\n\n";
+		cout << "Since this is a singly even size magic square, we know that the magic constant will be S where \n";
 		cout << "S = .5*(N^3+N).  For the square you have selected, this constant will be " << S << endl;
-		cout << "So we know we will be done solving when all of the rows, columns, and diagonals add up to " << S << "." << endl;
-		cout << "\nTo start off, we will solve an odd magic square of size (N/2)x(N/2), in this case that square will be of size" << endl;
+		cout << "So we know we will be done solving when all of the rows, columns, and diagonals add up to " << S << ".\n";
+		cout << "\nTo start off, we will solve an odd magic square of size (N/2)x(N/2), in this case that square will be of size\n";
 		cout<<size/2  << "x" << size/2 << ".  We will then fold 4 of these odd squares back into the original square, and do some  moving around.\n";
-		cout << "Press any key and enter to continue.\n";
+		cout << "\nPress any key and enter to continue.\n";
 		cin >> enter;
 		sEven(square, size);
 		print(square, size);
