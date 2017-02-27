@@ -29,8 +29,7 @@ void printStepMarked(vector<vector<int>> &square, vector<vector<int>> &markup, i
 	{
 		for (int col = 0; col < n; col++)
 		{
-			cout << "[";
-
+			cout << "[" << square[row][col] << "]";
 			if (markup[row][col] == 1)
 			{
 				if (flag == 1)  //For before the switch
@@ -48,7 +47,8 @@ void printStepMarked(vector<vector<int>> &square, vector<vector<int>> &markup, i
 						cout << "+";
 				}
 			}
-			cout << square[row][col] << "] \t";
+
+			cout << " \t";
 		}
 		cout << "\n\n";
 	}
@@ -271,7 +271,6 @@ void sEven(vector<vector<int>> &square, int n)
 		}
 	vector<vector<int>> markColRight(p, vector<int>(p, 0));
 	int markR = n % 3;
-	cout << markR << endl;
 	if (n == 18)
 		markR = 3;
 	for (i = 0; i < p; i++)
@@ -302,30 +301,25 @@ void sEven(vector<vector<int>> &square, int n)
 	cout << endl << "With the switching done, we see the new ordering of the square" << endl << endl;
 	//Now I do the actual swapping
 
-	
-	/*
-	vector<int> swapCol;  //For the swapping procedure
-	int k = (n - 2) / 4;  // to get ticknes of the swaps
-	for (i = 1; i <= k; i++)
-		swapCol.push_back(i);
-	for (i = n - k + 2; i <= n; i++)
-		swapCol.push_back(i);
-	int temp;
-	for (i = 1; i <= p; i++)
-		for (j = 1; j <= swapCol.size(); j++)
+	int tempL, tempR;
+	for (i = 0; i < p; i++) //filling all of the quadrants at once
+		for (j = 0; j < p; j++)
 		{
-			temp = square[i - 1][swapCol[j - 1] - 1];
-			square[i - 1][swapCol[j - 1] - 1] = square[i + p - 1][swapCol[j - 1] - 1];
-			square[i + p - 1][swapCol[j - 1] - 1] = temp;
+			if (markColLeft[i][j] == 1)  //We only have to work in quadrants, so I only need two loops.  This one is for the lhs
+			{
+				tempL = square[i][j];
+				square[i][j] = square[i + p][j];
+				square[i + p][j] = tempL;
+			}
+			if (markColRight[i][j] == 1)  //This one is for the rhs
+			{
+				tempR = square[i][j + p];
+				square[i][j + p] = square[i + p][j + p];
+				square[i + p][j + p] = tempR;
+			}
 		}
-	i = k;
-	j = 0;
-	temp = square[i][j];
-	square[i][j] = square[i + p][j];
-	square[i + p][j] = temp;
-	j = i;
-	temp = square[i + p][j];
-	square[i + p][j] = square[i][j];
-	square[i][j] = temp;
-	 */
+	printStepMarked(square, markVector, n, 0);
+	cout << "Press any key and enter to continue.\n";
+	cin >> enter;
+	cout << endl;
 }
