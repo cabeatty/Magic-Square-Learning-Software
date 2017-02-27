@@ -54,6 +54,21 @@ void printStepMarked(vector<vector<int>> &square, vector<vector<int>> &markup, i
 	}
 }
 
+void step(int i)
+{
+	cout << "------------------------------------------------------------------------------------------------------------------------\n";
+	cout << "-- Step " << i << " --\n";
+	cout << "------------------------------------------------------------------------------------------------------------------------\n\n";
+}
+
+void pause()
+{
+	char e;
+	cout << "Press any key and enter to continue.\n";
+	cin >> e;
+	cout << endl;
+}
+
 //--------------------------------------------------------------------------------------------------------------------/
 //--------------------------------------------------<ODD>-------------------------------------------------------------/
 //--------------------------------------------------------------------------------------------------------------------/
@@ -68,7 +83,6 @@ void odd(vector<vector<int>> &square, int n)
 			 "Since one column right and one row up is already filled, we simply put the number in the position below the last.",
 			 "We place the next number one column to the right, and one row up."
 			};
-	char enter; //For press any key and enter to continue
 	int x = n / 2;  //Center of the square
 	int y = 0;
 	//starting at the center on the top row with 1, we put the next number one square right, and one square up
@@ -76,15 +90,10 @@ void odd(vector<vector<int>> &square, int n)
 	for (int i = 1; i <= n * n; i++)
 	{
 		square[y][x] = i;
-
-		cout << "------------------------------------------------------------------------------------------------------------------------" << endl;
-		cout << "-- Step " << i << " --" << endl;
-		cout << "------------------------------------------------------------------------------------------------------------------------" << endl;
-		cout << endl << messages[messInd] << endl << endl;
+		step(i);
+		cout << messages[messInd] << endl << endl;
 		printStep(square, n);
-		cout << "Press any key and enter to continue.\n";
-		cin >> enter;
-		cout << endl;
+		pause();
 
 		int tempx = x + 1;
 		int tempy = y - 1;
@@ -120,6 +129,8 @@ void dEven(vector<vector<int>> &square, int n)
 {
 	//TODO: steps and visualizeation
 	int i, j;
+	int st = 1;
+	char enter;
 	vector<vector<int>> I(n, vector<int>(n, 0));
 	vector<vector<int>> J(n, vector<int>(n, 0));
 	int index = 1;
@@ -133,6 +144,12 @@ void dEven(vector<vector<int>> &square, int n)
 			index++;
 		}
 	}
+
+	step(st++);
+	cout << "We fill up our blank " << n << "*" << n << " square linearly, like follows.\n\n";
+	printStep(square, n);
+	pause();
+
 	for (i = 0; i < n; i++)
 	{
 		for (j = 0; j < n; j++)
@@ -140,6 +157,9 @@ void dEven(vector<vector<int>> &square, int n)
 			if (I[i][j] == J[i][j])
 			{
 				square[i][j] = n * n + 1 - square[i][j];
+				step(st++);
+				printStep(square, n);
+				pause();
 			}
 		}
 	}
@@ -173,15 +193,8 @@ void sEven(vector<vector<int>> &square, int n)
 
 	vector<vector<int>> quadrant(p, vector<int>(p, 0));  //We need an odd magic square of length half N
 	odd(quadrant, p);
-	cout
-			<< "------------------------------------------------------------------------------------------------------------------------"
-			<< endl;
-	cout << "-- Step " << ind++ << " --" << endl;
-	cout
-			<< "------------------------------------------------------------------------------------------------------------------------"
-			<< endl;
-	cout << endl << "Now that that is done, we fold said odd magic square back into the original, like follows:" << endl
-	     << endl;
+	step(ind++);
+	cout << endl << "Now that that is done, we fold said odd magic square back into the original, like follows:\n";
 
 	for (i = 0; i < p; i++) //filling all of the quadrants at once
 		for (j = 0; j < p; j++)
@@ -191,16 +204,13 @@ void sEven(vector<vector<int>> &square, int n)
 			square[i + p][j] = quadrant[i][j];    //Bottom left
 			square[i + p][j + p] = quadrant[i][j];  //Bottom right
 		}
-	printStep(square, n);
-	cout << "Press any key and enter to continue.\n";
-	cin >> enter;
-	cout << endl;
 
-	cout << "------------------------------------------------------------------------------------------------------------------------" << endl;
-	cout << "-- Step " << ind++ << " --" << endl;
-	cout << "------------------------------------------------------------------------------------------------------------------------" << endl;
-	cout << endl << "Now that that is done, we add the max value in the top right quadrant, to all of the values in the bottom " << endl;
-	cout << "right quadrant.  In this case that number is " << max << "." << endl << endl;
+	printStep(square, n);
+	pause();
+
+	step(ind++);
+	cout << endl << "Now that that is done, we add the max value in the top right quadrant, to all of the values in the bottom \n";
+	cout << "right quadrant.  In this case that number is " << max << ".\n\n";
 
 	for (i = 0; i < p; i++) //doing the addition on the bottom right quadrant
 		for (j = 0; j < p; j++)
@@ -208,47 +218,34 @@ void sEven(vector<vector<int>> &square, int n)
 			square[i + p][j + p] += max;      //Bottom right (adding p to each)
 		}
 	printStep(square, n);
-	cout << "Press any key and enter to continue.\n";
-	cin >> enter;
-	cout << endl;
+	pause();
 
-	cout << "------------------------------------------------------------------------------------------------------------------------" << endl;
-	cout << "-- Step " << ind++ << " --" << endl;
-	cout << "------------------------------------------------------------------------------------------------------------------------" << endl;
-	cout << endl << "Now that that is done, we add the max value in the bottom left quadrant, to all of the values in the top " << endl;
-	cout << "right quadrant.  In this case that number is " << max * 2 << "." << endl << endl;
+	step(ind++);
+	cout << "Now that that is done, we add the max value in the bottom left quadrant, to all of the values in the top \n";
+	cout << "right quadrant.  In this case that number is " << max * 2 << ".\n\n";
 	for (i = 0; i < p; i++) //doing the addition on the top right
 		for (j = 0; j < p; j++)
 		{
 			square[i][j + p] += (max * 2);    //Top right (adding 2*p to each)
 		}
 	printStep(square, n);
-	cout << "Press any key and enter to continue.\n";
-	cin >> enter;
-	cout << endl;
+	pause();
 
-	cout << "------------------------------------------------------------------------------------------------------------------------" << endl;
-	cout << "-- Step " << ind++ << " --" << endl;
-	cout << "------------------------------------------------------------------------------------------------------------------------"
-	     << endl;
-	cout << endl << "Now that that is done, we add the max value in the top right quadrant, to all of the values in the bottom " << endl;
-	cout << "left quadrant.  In this case that number is " << max * 3 << "." << endl << endl;
+	step(ind++);
+	cout << "Now that that is done, we add the max value in the top right quadrant, to all of the values in the bottom \n"
+	cout << "left quadrant.  In this case that number is " << max * 3 << ".\n\n";
 	for (i = 0; i < p; i++) //doing the addition on the bottom left quadrant
 		for (j = 0; j < p; j++)
 		{
 			square[i + p][j] += (max * 3);    //Bottom left (adding 3*p to each)
 		}
 	printStep(square, n);
-	cout << "Press any key and enter to continue.\n";
-	cin >> enter;
-	cout << endl;
+	pause();
 
-	cout << "------------------------------------------------------------------------------------------------------------------------" << endl;
-	cout << "-- Step " << ind++ << " --" << endl;
-	cout << "------------------------------------------------------------------------------------------------------------------------" << endl;
-	cout << endl << "Now we have to do some switching around.  The square is almost complete, but some things have to be moved around" << endl;
-	cout << "to make it work.  Look at the numbers with '-' next to them, we are going to switch them with their counterpart" << endl;
-	cout << "in the quadrant below.  These are the numbers with a '+' next to them." << endl << endl;
+	step(ind++);
+	cout << endl << "Now we have to do some switching around.  The square is almost complete, but some things have to be moved around\n";
+	cout << "to make it work.  Look at the numbers with '-' next to them, we are going to switch them with their counterpart\n";
+	cout << "in the quadrant below.  These are the numbers with a '+' next to them.\n\n";
 	vector<vector<int>> markColLeft(p, vector<int>(p, 0));
 	int markL = p / 2;
 	for (i = 0; i < p; i++)
@@ -290,17 +287,11 @@ void sEven(vector<vector<int>> &square, int n)
 			markVector[i + p][j + p] = markColRight[i][j];  //Bottom right
 		}
 	printStepMarked(square, markVector, n, 1);
+	pause();
 
-	cout << "Press any key and enter to continue.\n";
-	cin >> enter;
-	cout << endl;
-
-	cout << "------------------------------------------------------------------------------------------------------------------------" << endl;
-	cout << "-- Step " << ind++ << " --" << endl;
-	cout << "------------------------------------------------------------------------------------------------------------------------" << endl;
-	cout << endl << "With the switching done, we see the new ordering of the square" << endl << endl;
+	step(ind++);
+	cout << endl << "With the switching done, we see the new ordering of the square.\n\n";
 	//Now I do the actual swapping
-
 	int tempL, tempR;
 	for (i = 0; i < p; i++) //filling all of the quadrants at once
 		for (j = 0; j < p; j++)
@@ -319,7 +310,5 @@ void sEven(vector<vector<int>> &square, int n)
 			}
 		}
 	printStepMarked(square, markVector, n, 0);
-	cout << "Press any key and enter to continue.\n";
-	cin >> enter;
-	cout << endl;
+	pause();
 }
