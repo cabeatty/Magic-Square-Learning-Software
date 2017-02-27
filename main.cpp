@@ -127,6 +127,7 @@ int main()
 		cin >> q;
 	}
 
+	cout << string(50, '\n');
 	vector<vector<int>> square(q, vector<int> (q, 0));
 	int diag[2] = {0,0};
 
