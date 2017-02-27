@@ -123,17 +123,14 @@ int main()
 	cout << "\n";
 	cout << "Our goal is to teach you how to make magic squares yourself.  Select a size you want to start with:" << endl;
 	cout << "Enter an integer value between 3 & 20"<<endl;
-	cout << ">";
 	cin >> q;
 	while( q < 3 || q > 20 )
 	{
 		cout<<"//ERROR// The number has to be somewhere between 3 and 20"<<endl;
 		cout<<"Enter an integer value between 3 & 20"<<endl;
-		cout<<">";
 		cin >> q;
 	}
 
-	cout << string(50, '\n');
 	vector<vector<int>> square(q, vector<int> (q, 0));
 	int diag[2] = {0,0};
 

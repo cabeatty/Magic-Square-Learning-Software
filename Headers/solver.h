@@ -155,6 +155,10 @@ void dEven(vector<vector<int>> &square, int n)
 	step(st++);
 	cout << "We fill up our blank " << n << "*" << n << " square linearly, like follows.\n\n";
 	printStep(square, n);
+	cout << "--\n";
+	printStep(I, n);
+	cout << "--\n";
+	printStep(J, n);
 	pause();
 
 	for (i = 0; i < n; i++)
