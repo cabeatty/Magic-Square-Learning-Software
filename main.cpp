@@ -5,7 +5,6 @@
 #include <cstdlib>
 #include <iostream>
 #include <algorithm>
-#include <climits>
 #include "Headers/solver.h"
 
 using namespace std;
