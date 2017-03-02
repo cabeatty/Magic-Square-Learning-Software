@@ -153,12 +153,21 @@ void dEven(vector<vector<int>> &square, int n)
 	}
 
 	step(st++);
-	cout << "We fill up our blank " << n << "*" << n << " square linearly, like follows.\n\n";
+	cout << "We start by filling up a blank " << n << "*" << n << " square linearly, like follows.\n\n";
 	printStep(square, n);
-	cout << "--\n";
+	pause();
+
+	step(st++);
+	cout << "We then also fill two other " << n << "*" << n << " squares by filling the middle n/2 rows with 1's for the first square.\n";
+	cout << "And filling the middle n/2 columns for the second square.  They will be as follows: \n";
+	cout << "\n--\n\n";
 	printStep(I, n);
-	cout << "--\n";
+	cout << "\n--\n\n";
 	printStep(J, n);
+	cout << "We will use these two extra squares to find the positions on the original square where we will be\n";
+	cout << "doing some computation to find the actual values that we want there.  Essentially, we want to modify\n";
+	cout << "all values of the original square, where their position falls on a space where the two above squares\n";
+	cout << "have equal values.  We will call these the indexing squares.\n\n";
 	pause();
 
 	for (i = 0; i < n; i++)
@@ -167,8 +176,11 @@ void dEven(vector<vector<int>> &square, int n)
 		{
 			if (I[i][j] == J[i][j])
 			{
+				int temp = I[i][j];
 				square[i][j] = n * n + 1 - square[i][j];
 				step(st++);
+				cout << "Since the values in the space (" << i+1 << ", " << j+1 << ") in the indexing squares are both " << temp << " we will take the value\n";
+				cout <<	"in that same position in the original square and subtract it from n*n+1, in this case getting " << square[i][j] << ".\n\n";
 				printStep(square, n);
 				pause();
 			}
