@@ -5,6 +5,7 @@
 #include <cstdlib>
 #include <iostream>
 #include <algorithm>
+#include <climits>
 #include "Headers/solver.h"
 
 using namespace std;
@@ -112,6 +113,7 @@ void generate(vector<vector<int>> &square, int size)
 int main()
 {
 	int q;
+	bool cond;  //for catching wrong datatype errors
 	cout << "------------------------------------------------------------------------------------------------------------------------" << endl;
 	cout << "-- Welcome to the magic square learning software! --" << endl;
 	cout << "------------------------------------------------------------------------------------------------------------------------\n" << endl;
@@ -122,17 +124,29 @@ int main()
 	cout << "constant or magic sum of the magic square" << endl;
 	cout << "\n";
 	cout << "Our goal is to teach you how to make magic squares yourself.  Select a size you want to start with:" << endl;
-	cout << "Enter an integer value between 3 & 20"<<endl;
-	cin >> q;
-	while( q < 3 || q > 20 )
+
+	do
 	{
-		cout<<"//ERROR// The number has to be somewhere between 3 and 20"<<endl;
-		cout<<"Enter an integer value between 3 & 20"<<endl;
+		cond = false;
+		cout << "Enter an integer value between 3 & 20" << endl;
 		cin >> q;
+
+		if (cin.fail())
+		{
+			cin.clear();
+			cin.ignore();
+			cout << "//ERROR// not an integer value //ERROR//\n";
+			cond = true;
+		}
+		else if (q < 3 || q > 20)
+		{
+			cout << "//ERROR// integer value must be between 3 & 20 //ERROR//\n";
+			cond = true;
+		}
 	}
+	while (cond);
 
 	vector<vector<int>> square(q, vector<int> (q, 0));
 	int diag[2] = {0,0};
-
 	generate(square, q);
 }
