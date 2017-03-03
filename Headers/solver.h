@@ -2,7 +2,8 @@
  * Created by colin on 15/02/17.
  * This class will contain methods for solving s-even magic squares
 **/
-#define MIDTERM_ALT_SINGLYEVEN_H
+#ifndef solver
+#define solver
 
 #include <string>
 
@@ -287,15 +288,24 @@ void sEven(vector<vector<int>> &square, int n)
 			if (i != markL)
 			{
 				if (j < markL)
+				{
 					markColLeft[i][j] = 1;
+				}
 				else
+				{
 					markColLeft[i][j] = 0;
-			} else
+				}
+			}
+			else
 			{
 				if (j < markL + 1)
+				{
 					markColLeft[i][j] = 1;
+				}
 				else
+				{
 					markColLeft[i][j] = 0;
+				}
 				markColLeft[i][0] = 0;
 			}
 		}
@@ -308,7 +318,9 @@ void sEven(vector<vector<int>> &square, int n)
 		{
 			markColRight[i][j] = 0;
 			if (j >= p - markR)
+			{
 				markColRight[i][j] = 1;
+			}
 		}
 	vector<vector<int>> markVector(n, vector<int>(n, 0));
 	for (i = 0; i < p; i++) //filling all of the quadrants at once
@@ -345,3 +357,5 @@ void sEven(vector<vector<int>> &square, int n)
 	printStepMarked(square, markVector, n, 0);
 	pause();
 }
+
+#endif
