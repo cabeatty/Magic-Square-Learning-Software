@@ -138,7 +138,6 @@ void dEven(vector<vector<int>> &square, int n)
 	//TODO: steps and visualizeation
 	int i, j;
 	int st = 1;
-	char enter;
 	vector<vector<int>> I(n, vector<int>(n, 0));
 	vector<vector<int>> J(n, vector<int>(n, 0));
 	int index = 1;
@@ -219,7 +218,6 @@ void sEven(vector<vector<int>> &square, int n)
 	 * algorithm all together.
 	 */
 
-	char enter;
 	int p = n / 2;
 	int max = p * p;  //Proportional additive for the quadrants
 	int ind = max;  //for indexing the steps and not changing the value of max
