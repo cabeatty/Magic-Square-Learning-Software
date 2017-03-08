@@ -97,8 +97,7 @@ void dEven(vector<vector<int>> &square, int n)
 		cout << "We then also fill two other " << n << "*" << n << " squares by splitting them into " << n/2 << " 4x4 quadrants, and then filling the middle 2 rows with\n";
 		cout << "1's for all the quadrants in the first square.  And filling the middle 2 columns with ones for all of the quadrants in\n";
 		cout << "the second square.  They will be as follows: \n";
-	}
-	else
+	} else
 	{
 		cout << "We then also fill two other " << n << "*" << n << " squares by filling the middle n/2 rows with 1's for the first square.\n";
 		cout << "And filling the middle n/2 columns for the second square.  They will be as follows: \n";

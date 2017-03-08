@@ -35,7 +35,8 @@ void print(vector<vector<int>> &square, int n)  //Method to do the final pint ou
 	//Printing out the magic square and its summations, fancy formatting and all
 	for (int row = 0; row < n; row++) //print out the matrix
 	{
-		for (int col = 0; col < n; col++) {
+		for (int col = 0; col < n; col++)
+		{
 			cout << "[" << square[row][col] << "] \t";
 		}
 		cout << "" << rows[row];

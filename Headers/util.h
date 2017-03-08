@@ -39,16 +39,23 @@ void printStepMarked(vector<vector<int>> &square, vector<vector<int>> &markup, i
 				if (flag == 1)  //For before the switch
 				{
 					if (row < p)
+					{
 						cout << "+";
-					else
+					} else
+					{
 						cout << "-";
+					}
 				}
 				if (flag != 1)  //For after the switch, to show the new positions
 				{
 					if (row < p)
+					{
 						cout << "-";
+					}
 					else
+					{
 						cout << "+";
+					}
 				}
 			}
 
@@ -82,7 +89,6 @@ vector<vector<int>> swap(vector<vector<int>>& square, int i1, int j1, int i2, in
 	int temp = square[i1][j1];
 	square[i1][j1] = square[i2][j2];
 	square[i2][j2] = temp;
-
 	return square;
 }
 
