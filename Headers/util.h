@@ -77,4 +77,14 @@ void pause()
 	cout << endl;
 }
 
+vector<vector<int>> swap(vector<vector<int>>& square, int i1, int j1, int i2, int j2)
+{
+	int temp = square[i1][j1];
+	square[i1][j1] = square[i2][j2];
+	square[i2][j2] = temp;
+
+	return square;
+}
+
+
 #endif

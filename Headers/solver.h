@@ -164,6 +164,7 @@ void sEven(vector<vector<int>> &square, int n)
 	cout << "Now that that is done, we fold said odd magic square back into the original, like follows:\n\n";
 
 	for (i = 0; i < p; i++) //filling all of the quadrants at once
+	{
 		for (j = 0; j < p; j++)
 		{
 			square[i][j] = quadrant[i][j];      //Top left
@@ -171,6 +172,7 @@ void sEven(vector<vector<int>> &square, int n)
 			square[i + p][j] = quadrant[i][j];    //Bottom left
 			square[i + p][j + p] = quadrant[i][j];  //Bottom right
 		}
+	}
 
 	printStep(square, n);
 	pause();
@@ -180,10 +182,12 @@ void sEven(vector<vector<int>> &square, int n)
 	cout << "right quadrant.  In this case that number is " << max << ".\n\n";
 
 	for (i = 0; i < p; i++) //doing the addition on the bottom right quadrant
+	{
 		for (j = 0; j < p; j++)
 		{
 			square[i + p][j + p] += max;      //Bottom right (adding p to each)
 		}
+	}
 	printStep(square, n);
 	pause();
 
@@ -191,10 +195,12 @@ void sEven(vector<vector<int>> &square, int n)
 	cout << "Now that that is done, we add the max value in the bottom left quadrant, to all of the values in the top \n";
 	cout << "right quadrant.  In this case that number is " << max * 2 << ".\n\n";
 	for (i = 0; i < p; i++) //doing the addition on the top right
+	{
 		for (j = 0; j < p; j++)
 		{
 			square[i][j + p] += (max * 2);    //Top right (adding 2*p to each)
 		}
+	}
 	printStep(square, n);
 	pause();
 
@@ -202,10 +208,12 @@ void sEven(vector<vector<int>> &square, int n)
 	cout << "Now that that is done, we add the max value in the top right quadrant, to all of the values in the bottom \n";
 	cout << "left quadrant.  In this case that number is " << max * 3 << ".\n\n";
 	for (i = 0; i < p; i++) //doing the addition on the bottom left quadrant
+	{
 		for (j = 0; j < p; j++)
 		{
 			square[i + p][j] += (max * 3);    //Bottom left (adding 3*p to each)
 		}
+	}
 	printStep(square, n);
 	pause();
 
@@ -216,6 +224,7 @@ void sEven(vector<vector<int>> &square, int n)
 	vector<vector<int>> markColLeft(p, vector<int>(p, 0));
 	int markL = p / 2;
 	for (i = 0; i < p; i++)
+	{
 		for (j = 0; j < p; j++)
 		{
 			if (i != markL)
@@ -223,30 +232,31 @@ void sEven(vector<vector<int>> &square, int n)
 				if (j < markL)
 				{
 					markColLeft[i][j] = 1;
-				}
-				else
+				} else
 				{
 					markColLeft[i][j] = 0;
 				}
-			}
-			else
+			} else
 			{
 				if (j < markL + 1)
 				{
 					markColLeft[i][j] = 1;
-				}
-				else
+				} else
 				{
 					markColLeft[i][j] = 0;
 				}
 				markColLeft[i][0] = 0;
 			}
 		}
+	}
 	vector<vector<int>> markColRight(p, vector<int>(p, 0));
 	int markR = n % 3;
 	if (n == 18)
+	{
 		markR = 3;
+	}
 	for (i = 0; i < p; i++)
+	{
 		for (j = 0; j < p; j++)
 		{
 			markColRight[i][j] = 0;
@@ -255,8 +265,10 @@ void sEven(vector<vector<int>> &square, int n)
 				markColRight[i][j] = 1;
 			}
 		}
+	}
 	vector<vector<int>> markVector(n, vector<int>(n, 0));
 	for (i = 0; i < p; i++) //filling all of the quadrants at once
+	{
 		for (j = 0; j < p; j++)
 		{
 			markVector[i][j] = markColLeft[i][j];      //Top left
@@ -264,6 +276,7 @@ void sEven(vector<vector<int>> &square, int n)
 			markVector[i + p][j] = markColLeft[i][j];    //Bottom left
 			markVector[i + p][j + p] = markColRight[i][j];  //Bottom right
 		}
+	}
 	printStepMarked(square, markVector, n, 1);
 	pause();
 
@@ -272,21 +285,19 @@ void sEven(vector<vector<int>> &square, int n)
 	//Now I do the actual swapping
 	int tempL, tempR;
 	for (i = 0; i < p; i++) //filling all of the quadrants at once
+	{
 		for (j = 0; j < p; j++)
 		{
 			if (markColLeft[i][j] == 1)  //We only have to work in quadrants, so I only need two loops.  This one is for the lhs
 			{
-				tempL = square[i][j];
-				square[i][j] = square[i + p][j];
-				square[i + p][j] = tempL;
+				square = swap(square, i, j, i + p, j);
 			}
 			if (markColRight[i][j] == 1)  //This one is for the rhs
 			{
-				tempR = square[i][j + p];
-				square[i][j + p] = square[i + p][j + p];
-				square[i + p][j + p] = tempR;
+				square = swap(square, i, j + p, i + p, j + p);
 			}
 		}
+	}
 	printStepMarked(square, markVector, n, 0);
 	pause();
 }
