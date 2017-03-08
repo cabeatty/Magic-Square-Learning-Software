@@ -2,80 +2,13 @@
  * Created by colin on 15/02/17.
  * This class will contain methods for solving s-even magic squares
 **/
-#ifndef solver
-#define solver
+#ifndef SOLVER_H
+#define SOLVER_H
 
 #include <string>
+#include "util.h"
 
 using namespace std;
-
-void printStep(vector<vector<int>> &square, int n)  //All this will do is print out the matrix at a step determined by other methods
-{
-	for (int row = 0; row < n; row++) //print out the matrix
-	{
-		for (int col = 0; col < n; col++)
-		{
-			cout << "[" << square[row][col] << "] \t";
-		}
-		cout << "\n\n";
-		if (row < n-1)
-		{
-			cout << "\n";
-		}
-	}
-}
-
-//print out the matrix for the switching step in singly even case
-void printStepMarked(vector<vector<int>> &square, vector<vector<int>> &markup, int n, int flag)
-{
-	int p = n / 2;
-	for (int row = 0; row < n; row++) //print out the matrix
-	{
-		for (int col = 0; col < n; col++)
-		{
-			cout << "[" << square[row][col] << "]";
-			if (markup[row][col] == 1)
-			{
-				if (flag == 1)  //For before the switch
-				{
-					if (row < p)
-						cout << "+";
-					else
-						cout << "-";
-				}
-				if (flag != 1)  //For after the switch, to show the new positions
-				{
-					if (row < p)
-						cout << "-";
-					else
-						cout << "+";
-				}
-			}
-
-			cout << " \t";
-		}
-		cout << "\n\n";
-		if (row < n-1)
-		{
-			cout << "\n";
-		}
-	}
-}
-
-void step(int i)
-{
-	cout << "------------------------------------------------------------------------------------------------------------------------\n";
-	cout << "-- Step " << i << " --\n";
-	cout << "------------------------------------------------------------------------------------------------------------------------\n\n";
-}
-
-void pause()
-{
-	char e;
-	cout << "Press any key and enter to continue.\n";
-	cin >> e;
-	cout << endl;
-}
 
 //--------------------------------------------------------------------------------------------------------------------/
 //--------------------------------------------------<ODD>-------------------------------------------------------------/
