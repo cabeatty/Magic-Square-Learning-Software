@@ -7,6 +7,8 @@
 #ifndef UTIL_H
 #define UTIL_H
 
+#include <iostream>
+#include <algorithm>
 using namespace std;
 
 void printStep(vector<vector<int>> &square, int n)  //All this will do is print out the matrix at a step determined by other methods
